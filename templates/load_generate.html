@@ -1,0 +1,101 @@
+<!doctype html>
+
+<head>
+  <title>NER</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="static/js/jquery-3.4.1.slim.min.js"></script>
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <script src="static/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+  <script type="text/javascript">
+    function ChangeDropdowns(value){
+        if(value==""){
+            document.getElementById('models').style.display='none';
+        }else if(value=="enable"){
+            document.getElementById('models').style.display='block';
+        }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="header">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            <a Class="navbar-brand" href="#">NER</a></div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="defaultNavbar1">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li class="active" ><a href="/dataset_loader">Load Data<span class="sr-only"> (current) </span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/train">Train</a></li>
+              <li><a href="/export">Export</a></li>
+              <!-- <li class="dropdown">s<a href="#" class="dropdown-toggle"
+data-toggle="dropdown" role="button" aria-haspopup="true"
+aria-expanded="false">Dropdown<span class="caret"></span></a> -->
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+    </div>
+    <div class="content">s
+      <div class="c0121 c0119">
+        <div tabindex="-1"></div>
+          <div class="c0128">
+            <div>
+              <div>
+                <div tabindex="-1">
+                  <div style="margin: 3% 3% 3% 3%;">
+
+                    <form action="/dataset_loader">
+                      {% if datasets %}
+                        <select id="datasets">
+                          {% for dataset in datasets %}
+                          <option value='{{dataset["filename"]}}'>{{dataset["label"]}}</option>
+                          {% endfor %}
+                        </select>
+                      {% endif %}
+                      <input type="text" id="name" name="name" placeholder="Enter dataset name"><br>
+                      <input type="radio" id="model-assist" name="model-assist" value="enable" onclick="ChangeDropdowns(this.value)"><label for="model-assist">Enable Model Assist</label>
+                      {% if models %}
+                        <select id="models" style="display:none;">
+                          {% for model in models %}
+                          <option value='{{model}}'>{{model}}</option>
+                          {% endfor %}
+                        </select>
+                      {% else %}
+                      <p id="models" style="display:none;">There are no models here. Trying installing some from spacy first.</p>
+                      {% endif %}
+                      <br>
+                      <button type="submit">Submit</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="config"></div>
+        <div class="footer"></div>
+    </div>
+  </body>
+<!--Purposely added to the bottom to allow page load -->
+</html>

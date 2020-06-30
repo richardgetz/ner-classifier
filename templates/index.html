@@ -1,15 +1,14 @@
 <!doctype html>
 
 <head>
-  <title>Classify</title>
+  <title>NER</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script src="static/js/jquery-3.4.1.slim.min.js"></script>
+  <script type="application/javascript" src="static/js/jquery-3.4.1.slim.min.js"></script>
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
-  <script src="static/js/bootstrap.min.js"></script>
+  <script type="application/javascript" src="static/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="static/css/main.css">
-  <script src="static/js/tagManager.js"></script>
+  <script type="application/javascript" src="static/js/tagManager.js"></script>
 </head>
 
 <body>
@@ -19,28 +18,28 @@
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-                class="icon-bar"></span><span class="icon-bar"></span></button>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false">
+              <span class="sr-only">Togglenavigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             <a class="navbar-brand" href="#">NER</a></div>
-
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="defaultNavbar1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
+              <li class="active"><a href="/">Home<span class="sr-only"> (current) </span></a></li>
+              <li><a href="/dataset_loader">Load Data</a></li>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </li>
+              <li><a href="/train">Train</a></li>
+              <li><a href="/export">Export</a></li>
+              <!-- <li class="dropdown">s<a href="#" class="dropdown-toggle"
+data-toggle="dropdown" role="button" aria-haspopup="true"
+aria-expanded="false">Dropdown<span class="caret"></span></a> -->
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
             </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -50,49 +49,52 @@
     </div>
     <div class="content">
       <div class="c0121 c0119">
-        <div tabindex="-1"></div>
-        <div class="c0128">
-          <div>
+        <div tabindex="-1">
+          <div class="c0128">
             <div>
-              <div tabindex="-1">
-                <div>
+              <div>
+                <div tabindex="-1" style="margin: 3% 3% 3% 3%;">
                   <ul class="labels">
+                    {% for label in labels %}
                     <li>
-                      <input type="radio" id="PERSON" name="label" checked="checked" />
-                      <label for="PERSON">PERSON</label>
+                      <input type="radio" id='{{label}}' name="label" {% if label == 'PERSON' %} checked {% endif %} />
+                      <label for='{{label}}'>{{label}}</label>
                     </li>
-                    <li>
-                      <input type="radio" id="ORG" name="label" />
-                      <label for="ORG">ORG</label>
-                    </li>
-                    <li>
-                      <input type="radio" id="LOC" name="label" />
-                      <label for="LOC">LOC</label>
-                    </li>
-                    <li>
-                      <input type="radio" id="GPE" name="label" />
-                      <label for="GPE">GPE</label>
-                    </li>
+                    {% endfor %}
                   </ul>
-
-
                 </div>
               </div>
             </div>
           </div>
-          <div class="sentence" id="sentence">
+          <br>
+          <br>
+          <br>
+          <div style="margin:3% 3% 3% 3%;text-align:center;" class="sentence" id="sentence">
             {% for token in tokens %}
-            <span class="c0132" id='{{token["id"]}}' name="tokens">{{token["word"]}}</span>
+            <span class="c0132" id='{{token["id"]}}' name="tokens">{{token["word"]}}&nbsp;</span >
             {% endfor %}
+            </div>
+
+            </div>
+            <input type="button" value="Submit" onclick="javascript:post();" class="btn btn-primary" />
+
           </div>
-        </div
-      </div>
+        </div>
+        <div class="config"></div>
+        <div class="footer"></div>
     </div>
-    <div class="config"></div>
-    <div class="footer"></div>
-
-  </div>
-
-</body>
-
+  </body>
+<!--Purposely added to the bottom to allow page load -->
+<script type="text/javascript">
+  sentence_id = {{sentence_id}};
+  tag_dictionary = {{spans|tojson}};
+  console.log(tag_dictionary);
+  if (tag_dictionary == "" || tag_dictionary == null) {
+    tag_dictionary = {};
+  }
+  if (tag_dictionary != {}) {
+    console.log(tag_dictionary)
+    initialLabels();
+  }
+</script>
 </html>
