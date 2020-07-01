@@ -95,11 +95,11 @@ function initialLabels() {
       var create_wrapper = '';
       i = parseInt(tag_dictionary[key][val].split(":")[0]);
       a = parseInt(tag_dictionary[key][val].split(":")[1]);
-      console.log(i, a)
+      console.log(local_label)
       if (i == a) {
         create_wrapper = "#" + String(i);
         last = i;
-        $(create_wrapper).wrap('<mark class="label_highlight" id="label_highlight_' + String(last) + '"></mark>');
+        $(create_wrapper).wrap('<mark class="label_highlight ' + String(local_label) + '" id="label_highlight_' + String(last) + '"></mark>');
       } else {
         while (i <= a) {
           create_wrapper += "#" + String(i) + ", ";
@@ -107,7 +107,7 @@ function initialLabels() {
           i++;
         }
         create_wrapper = create_wrapper.replace(/,\s$/g, '');
-        $(create_wrapper).wrapAll('<mark class="label_highlight" id="label_highlight_' + String(last) + '"></mark>');
+        $(create_wrapper).wrapAll('<mark class="label_highlight ' + String(local_label) + '" id="label_highlight_' + String(last) + '"></mark>');
       }
       var good_selection = false;
       if (i != null && a != null && i != "NaN" && a != "NaN") {
@@ -135,7 +135,7 @@ function gText() {
     if (i == a) {
       create_wrapper = "#" + String(i);
       last = i;
-      $(create_wrapper).wrap('<mark id="label_highlight_' + String(last) + '" class="label_highlight"></mark>');
+      $(create_wrapper).wrap('<mark id="label_highlight_' + String(last) + '" class="label_highlight ' + String(button_label) + '"></mark>');
       start = i;
       end = i;
     } else {
@@ -147,7 +147,7 @@ function gText() {
       }
       end = i - 1;
       create_wrapper = create_wrapper.replace(/,\s$/g, '');
-      $(create_wrapper).wrapAll('<mark id="label_highlight_' + String(last) + '" class="label_highlight"></mark>');
+      $(create_wrapper).wrapAll('<mark id="label_highlight_' + String(last) + '" class="label_highlight ' + String(button_label) + '"></mark>');
     }
     var good_selection = false;
     if (start != null && end != null && start != NaN && end != NaN && start + ":" + end != "NaN:NaN" && end >= start) {

@@ -1,0 +1,21 @@
+.PERSON{
+  background:#ffe184;
+}
+.EMAIL{
+  background:#CBC2FF;
+}
+.ORG{
+  background:#8fe0f5;
+}
+.LOC{
+  background:#FFDEAD;
+}
+.NORP{
+  background:#85ffb6;
+}
+.GPE{
+  background:#FFADAD;
+}
+.PHONE{
+  background:#F7B4F8;
+}
