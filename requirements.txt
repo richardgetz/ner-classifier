@@ -16,7 +16,7 @@ Jinja2==2.11.2
 lxml==4.5.1
 MarkupSafe==1.1.1
 murmurhash==1.0.2
-numpy==1.19.0
+numpy==1.22.0
 ocrmypdf==10.2.0
 pdfminer.six==20200517
 pikepdf==1.15.1
